@@ -1,0 +1,140 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "rewiser": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/rewiser",
+      "sourceRoot": "apps/rewiser/src",
+      "prefix": "rewiser",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/rewiser",
+            "index": "apps/rewiser/src/index.html",
+            "main": "apps/rewiser/src/main.ts",
+            "polyfills": "apps/rewiser/src/polyfills.ts",
+            "tsConfig": "apps/rewiser/tsconfig.app.json",
+            "assets": [
+              "apps/rewiser/src/favicon.ico",
+              "apps/rewiser/src/assets"
+            ],
+            "styles": ["apps/rewiser/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/rewiser/src/environments/environment.ts",
+                  "with": "apps/rewiser/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "rewiser:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "rewiser:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "rewiser:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/rewiser/tsconfig.app.json",
+              "apps/rewiser/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/rewiser/jest.config.js",
+            "tsConfig": "apps/rewiser/tsconfig.spec.json",
+            "setupFile": "apps/rewiser/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "rewiser-e2e": {
+      "root": "apps/rewiser-e2e",
+      "sourceRoot": "apps/rewiser-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/rewiser-e2e/cypress.json",
+            "tsConfig": "apps/rewiser-e2e/tsconfig.e2e.json",
+            "devServerTarget": "rewiser:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "rewiser:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/rewiser-e2e/tsconfig.e2e.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "rewiser"
+}
