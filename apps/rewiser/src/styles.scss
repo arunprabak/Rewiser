@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+// @import '~@angular/material/prebuilt-themes/purple-green.css';
+// @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 html,
 body {
@@ -8,4 +11,20 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+.router-outlet {
+  margin: 30px;
+}
+
+.container {
+  display: flex;
+  margin: 5px;
+  flex-wrap: wrap;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.container [class*='col'] {
+  padding: 5px;
+  flex: 1;
 }
